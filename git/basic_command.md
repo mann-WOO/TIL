@@ -68,6 +68,7 @@
 - `git pull <원격저장소 이름> <올릴 브랜치 이름>`
   - `git pull origin master`
 - 원격 저장소의 변경사항을 다운로드
+- 
 
 
 
