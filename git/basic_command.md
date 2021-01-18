@@ -32,6 +32,7 @@
 ### remote add
 
 - `git remote add <별명> <주소>` 
+  - 주로 `git remote add origin <주소>`로 사용한다.
 - 원격저장소 주소를 등록
 
 
@@ -56,6 +57,17 @@
 - `git push <원격저장소 이름> <올릴 브랜치 이름>`
   - `git push origin master`
 - commit history를 원격 저장소에 업로드
+
+### clone
+
+- `git clone <주소>`
+- 주소의 repository를 내 컴퓨터에 복사
+
+### pull
+
+- `git pull <원격저장소 이름> <올릴 브랜치 이름>`
+  - `git pull origin master`
+- 원격 저장소의 변경사항을 다운로드
 
 
 
