@@ -61,7 +61,7 @@
 ### clone
 
 - `git clone <주소>`
-- 주소의 repository를 내 컴퓨터에 복사
+- 주소의 repository 폴더를 내 배쉬 디렉토리에 복사
 
 ### pull
 
