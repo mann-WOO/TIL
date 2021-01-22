@@ -100,6 +100,18 @@
 
 
 
+### 리스트(list)
+
+- concatenate: 잇다.
+  - `[a, b, c] + [d, e, f]` -> `[a, b, c, d, e, f]`
+
+### 딕셔너리(dictionary)
+
+- `dict_a['key1']`과 `dict_b.get('key1')`의 차이점?
+  - `.get`을 사용하면 존재하지 않는 key를 조회시 None이 출력된다.
+
+
+
 ## 연산자(Operator)
 
 ---
