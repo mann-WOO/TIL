@@ -14,7 +14,7 @@
 >
 > 타입(type), 속성(attribute)와 조작법(method)을 가진다.
 
-- `list`라는 클래스의 `student_names`가 있을 때, `studnet_names`라는 인스턴스는 당연히 객체이고, `list`라는 클래스 또한 객체이다. 클래스도 `type`이라는 타입을 가지고, class attribute를 가질 수 있고, class method 또한 가질 수 있다.
+- `list`라는 클래스의 `student_names`가 있을 때, `studnet_names`라는 인스턴스는 당연히 객체이고(정확히는 `student_names`라는 변수 안에 있는 리스트 인스턴스가 객체이고, `student_names`는 그 인스턴스의 별명(변수)이다.), `list`라는 클래스 또한 객체이다. 클래스도 `type`이라는 타입을 가지고, class attribute를 가질 수 있고, class method 또한 가질 수 있다.
 
 ### type
 
@@ -96,7 +96,7 @@ class Student():
         self.name = name
         self.age = age
 
-s1 = Student('john', 17)
+s1 = Student('john', 17) # (1)인스턴스를 생성하고 (2)s1에 할당한다.
 print(s1.name, s1.age)
 
 out: 'john' 17
@@ -268,3 +268,110 @@ out: 생성
 - **생성자 메서드**(`__init__()`)는 인스턴스를 생성할 때 호출되는 메서드이다. 인스턴스를 생성할 때는 생성자 메서드의 매개변수에 맞춰 인자를 넣어줘야한다.
 - **소멸자 메서드**(`__del__()`)는 `del instance`로 인스턴스를 삭제할 때 호출되는 메서드이다.
 - `__str__()`는 **매직메서드**의 일종으로, python의 내장함수 `print(instance)`를 실행했을 때 return할 내용을 설정한다. 이처럼 매직메서드는 특별한 역할들을 수행한다.
+
+
+
+## 상속(Inheritence)
+
+### 상속
+
+> 기존에 존재하는 클래스를 재사용하여 다른 클래스를 정의하고 싶을 때 사용한다.
+
+```python
+# 사용법
+class ChildClass(ParentClass):
+    pass
+```
+
+- 부모 클래스의 모든 attribute, method가 자식 클래스에 상속된다.
+- 상속받은 attribute와 method는 부모 클래스의 것이 그대로 복사되어 자식 클래스 내부에 존재한다. 매번 부모 클래스에 접근하는 방식은 아니다.
+- 공통된 attribute나 method를 부모 클래스에 정의하고, 이를 바탕으로 다양한 자식 클래스를 만들수 있다.
+- 상속의 단계는 더 늘어날 수 있다. ex) GrandParentClass -ParentClass - ChildClass 
+
+상속 관계인 클래스들의 타입 판별
+
+- `isinstance(instance, class)`
+
+  - ```python
+    isinstance(child1, ParentClass) #=> True
+    isinstance(child1, ChildClass) #=> True
+    ```
+
+  - 부모 클래스를 입력해도 `True`를 return
+
+- `type(instance)`
+
+  - ```python
+    type(child1) is ParentClass #=> False
+    type(child1) is ChildClass #=> True
+    ```
+
+  - 정확한 해당 클래스를 return
+
+### 메서드 오버라이딩(Method Overriding)
+
+> 자식 클래스에서 부모 클래스의 메서드를 덮어쓰는(override) 것
+
+```python
+class ParentClass():
+    @staticmethod
+    def greeting():
+        print('hi')
+
+class ChildClass(ParentClass):
+    @staticmethod
+    def greeting():
+        print('hello')
+```
+
+- 부모 클래스의 메서드를 자식클래스에서 같은 이름으로 재정의하면 덮어쓸 수 있다.
+
+### super()
+
+> 자식 클래스에서 메서드를 정의할 때, 부모 클래스의 메서드 중 하나를 사용하는 방법, 메서드 오버라이딩 시, 같은 이름의 메서드를 정의하면서 부모 메서드를 재활용하고 싶을 때 사용한다.
+
+```python
+class Rectangle:
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width
+        
+    def area(self):
+        return self.length * self.width
+    
+class Square(Rectangle):
+    def __init__(self, length):
+        # 자식의 메서드 정의 안에서 부모의 메서드를 실행한다고 생각한다.
+        # 인스턴스 메서드를 실행할 때는, self를 자동으로 받는다.
+        # 따라서 나머지 매개변수에 해당하는 인자들을 채워준다.
+        super().__init__(length, length)
+        
+s1 = Square(3)
+s1.area() #=> 9
+```
+
+- 추후 사용하면서 배우고 익숙해지면 좋겠습니다. 아직은 조금 헷갈림
+
+
+
+### 다중상속
+
+> 두개 이상의 클래스를 상속받아 클래스를 생성하는 경우
+
+```python
+class child(Mom,Dad):
+    pass
+```
+
+- 상속받은 두 클래스의 attribute와 method가 모두 복제되어 자식 클래스에 존재한다.
+- 만약 부모 클래스에 중복된 attribute나 method가 존재한다면, 먼저 적힌 클래스(예시에서는 Mom)의 attribute나 method를 참조한다.
+- 하지만, 일반적으로 **두 개 이상의 클래스를 상속받을 때는 attribute나 method를 중복하여 상속받지 않도록 설계**해야 한다.
+
+
+
+
+
+### note
+
+- 클래스에서 모듈을 사용할 때는 클래스 바깥 맨 위에서 호출하고 사용하는 것이 rule이다.
+
