@@ -96,6 +96,18 @@
 
 
 
+## CSS 레이아웃 테크닉
+
+> CSS를 이용해 웹의 레이아웃을 설정하는 테크닉
+
+- display: inline, blcok...
+- position: static, relative, absolute, fix, sticky 
+- float
+- **flexbox**
+- grid
+
+
+
 ## CSS Display
 
 ### display
@@ -133,8 +145,40 @@
 
 
 
+## float
+
+> 박스를 글씨와 어울리게 하는 기능, `float: left`로 설정
+
+- float을 적용하면 `position: absolute`와 같이 자신의 자리를 잃어버린다.
+- 따라서 float 박스 다음에 float이 아닌 박스가 오면 겹치게 된다.
+
+### clearfix::after
+
+> float 박스를 다른 박스가 침범하지 못하도록, 가상의 블럭을 설정
 
 
-## CSS 코딩의 원칙
 
-> CSS는 기능별로(사이즈, 바탕색, 글색, 글꼴, 테두리 등등) 클래스를 구성하고, 그 기능이 필요한 태그에 기능에 해당하는 클래스들을 부여하여 재사용 유지보수에 용이하도록 한다.
+## flexbox
+
+> container 안에 여러가지 내용물이 들어있는 형태. 왼쪽에서 오른쪽으로 컨테이너를 꽉 채워 줄을 바꾸지 않고 정렬되는 것을 기본값으로 가진다.
+
+### flexbox control
+
+> flexbox의 정렬 등은 container 태그에서 이루어진다.
+>
+> 정렬은 `justify-content`, `align-items`으로 대부분의 경우 해결 가능하다.
+
+- `display: flex`: flexbox로 설정
+- `flex-direction: row(-reverse), column(-reverse)`: flexbox의 메인축 방향 설정
+- `flex-wrap: nowrap(default), wrap(-reverse):`: 줄바꿈 여부 설정
+- `justify-content: flex-start, flex-end, center, space-between, space-round, space-evenly`: 메인축 방향의 정렬 방식 설정
+- `align-items`: <u>줄바꿈이 일어나지 않았을 때</u> 교차축 방향의 정렬 방식 설정
+- `align-content`: <u>줄바꿈이 일어났을 때 때</u> 교차축 방향의 정렬 방식 설정
+- `align-self`: <u>felxbox의 아이템 태그에서 설정</u>, 교차축 방향의 정렬 방식
+- `order`: <u>flexbox의 아이템 태그에서 설정</u>, 0을 기본값으로 순서를 설정
+
+
+
+## CSS 코딩 tip
+
+> CSS는 기능별로(사이즈, 바탕색, 글색, 글꼴, 테두리 등등) 클래스를 구성하고, 그 기능이 필요한 태그에 기능에 해당하는 클래스들을 부여하여 재사용 유지보수에 용이하도록 한다. -> bootstrap 등의 framework 이용방식
