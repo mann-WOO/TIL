@@ -172,7 +172,7 @@
 - `flex-direction: row(-reverse), column(-reverse)`: flexbox의 메인축 방향 설정
 - `flex-wrap: nowrap(default), wrap(-reverse):`: 줄바꿈 여부 설정
 - `justify-content: flex-start, flex-end, center, space-between, space-round, space-evenly`: 메인축 방향의 정렬 방식 설정
-- `align-items`: <u>줄바꿈이 일어나지 않았을 때</u> 교차축 방향의 정렬 방식 설정
+- `align-items`: <u>줄바꿈이 일어나지 않았을 때</u> 교차축 방향의 정렬 방식 설정 (default: stretch)
 - `align-content`: <u>줄바꿈이 일어났을 때 때</u> 교차축 방향의 정렬 방식 설정
 - `align-self`: <u>felxbox의 아이템 태그에서 설정</u>, 교차축 방향의 정렬 방식
 - `order`: <u>flexbox의 아이템 태그에서 설정</u>, 0을 기본값으로 순서를 설정
