@@ -41,3 +41,38 @@
 - 6 tiers of grid option: 반응형 계층 breakpoint - 6가지 구간의 화면 크기에 따라 다른 구성이 보이도록 설정 가능
 - **CSS의 grid와는 다르다** => Bootstrap의 grid system은 flexible box를 기반으로 한다.
 
+
+
+## container
+
+> bootstrap으로 코드를 짤 때, 대부분의 경우 container 안에 넣어준다. menu, footer 등 제외.
+
+- 양쪽에 여백을 줘서 보기 편하게 해준다.
+
+
+
+#### cf)html에서 케밥케이스(kebab-case)를 사용하는 이유
+
+- 하이퍼링크 등이 밑줄 처리 되기 때문에 언더바가 보이지 않는다.
+- 대소문자 구분이 안되는 경우가 있다.
+
+
+
+## Bootstrap 기능
+
+### navbar
+
+- 기본적으로 상단에 고정(fixed-top) 되는 네비게이션 바를 생성
+- 드롭다운 메뉴, 토글(햄버거) 메뉴 등 반응형으로 사용할 수 있다.
+  - 토글 메뉴 사용시 components-collapse 참조
+
+### modal
+
+- 현재 페이지를 유지한 채 추가적인 창(로그인 등)을 띄우고 싶을 때 사용
+- modal을 구현한 후, 버튼/하이퍼링크 등과 연동하여 사용
+
+### carousel
+
+- 여러 이미지를 바꿔가며 보여준다.
+  - 자동으로 넘기는 기능과, 화살표 및 인덱스를 추가하는 기능이 있다.
+
