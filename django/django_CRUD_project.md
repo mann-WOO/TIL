@@ -1,4 +1,4 @@
-# django CRUD project
+# Django CRUD project
 
 > CRUD 기능을 가진 Django 프로젝트 처음부터 끝까지 만들어보기
 >
