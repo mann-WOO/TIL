@@ -292,4 +292,5 @@
    ]
    ```
 
-   
+   cf) `request`는 `request` 객체, `render`와 `redirect`는 `response` 객체입니다.
+
