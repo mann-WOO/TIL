@@ -138,6 +138,8 @@ def login(request):
 ```
 
 - `AuthenticationForm`은 `ModelForm`이 아닌 `Form`이다. `ModelForm`은 모델의 데이터를 생성 혹은 변경할 때 사용된다. `login`은 유저가 입력한 데이터가 모델의 데이터와 일치하는지 확인하고 세션을 발급하는 용도로 사용되기 때문에 `ModelForm`을 사용하지 않는다.
+- `request.GET.get('next') or 'articles:index'`는 단축평가를 이용해 `GET` 메서드로 전달받은 `next` 값이 있을 시 로그인 후 바로 해당 페이지로 이동시켜주는 역할을 수행한다. `@login_required` 데코레이터에 의해 로그인 페이지로 이동된 경우 작동한다.
+  - 이렇게 이동된 페이지는 마찬가지로 `GET` 방식으로 접근한다. 따라서  `POST` 방식의 접근만 허용된 페이지는 `next` 값을 통해 이동하게 되면 http 에러가 발생한다. 이를 해결하기 위해서는 `@require_POST` 데코레이터를 해제하고 내부 로직으로 `GET` 방식의 접근을 우회해 주는 등 다양한 방식의 고민이 필요하다.
 
 ### logout
 
