@@ -42,7 +42,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 ```
 
-
+<br>
 
 ### Create(회원가입)
 
@@ -65,11 +65,12 @@ def signup(request):
     return render(request, 'accounts/form.html', context)
 ```
 
-
+- `UserCreationForm`은`ModelForm`이다.
 
 ### Read(회원정보)
 
 ```python
+# views.py
 def profile(request, username):
     user_info = get_object_or_404(User, username=username)
     context = {
@@ -78,38 +79,73 @@ def profile(request, username):
     return render(request, 'accounts/profile.html', context)
 ```
 
-
+- `username` 혹은 `pk` 값과 같은 유일한 정보를 통해 유저의 개별 정보에 접근한다. 
 
 ### Update(회원정보 수정)
 
 ```python
-
+# views.py
+def update(request):
+    if request.method == "POST":
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('articles:index')
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+    context = {
+        'form': form,
+    }
+    return render(request, 'accounts/update.html', context)
 ```
 
+- `UserChangeForm`은 관리자 권한 부여 등 일반 유저가 접근하기에 적절하지 않은 form들을 포함한다. 따라서 회원정보 수정 시 일반 유저가 변경해도 되는 적절한 항목들을 골라 `UserChangeForm`을 상속받은 `CustomUserChangeForm`을 만들어 사용한다.
+- `UserCreationForm`과 마찬가지로, `ModelForm`과 같은 방식으로 사용한다.
 
-
-### Delete회원탈퇴
+### Delete(회원탈퇴)
 
 ```python
-
+# views.py
+def delete(request):
+    if request.user.is_authenticated:
+        request.user.delete()
+    return redirect('articles:index')
 ```
 
-
+<br>
 
 ## Authentication 구현(login/logout)
 
 ### login
 
 ```python
-
+# views.py
+def login(request):
+    if request.user.is_authenticated:
+        return redirect('articles:index')
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            # 세션 생성
+            auth_login(request, form.get_user())
+            return redirect(request.GET.get('next') or 'articles:index')
+    else:
+        form = AuthenticationForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'accounts/login.html', context)
 ```
 
-
+- `AuthenticationForm`은 `ModelForm`이 아닌 `Form`이다. `ModelForm`은 모델의 데이터를 생성 혹은 변경할 때 사용된다. `login`은 유저가 입력한 데이터가 모델의 데이터와 일치하는지 확인하고 세션을 발급하는 용도로 사용되기 때문에 `ModelForm`을 사용하지 않는다.
 
 ### logout
 
 ```python
-
+# views.py
+def logout(request):
+    auth_logout(request)
+    return redirect('articles:index')
 ```
 
 
@@ -120,3 +156,6 @@ def profile(request, username):
 
 - settings.py의 TEMPLATES 리스트를 보면 장고에서 html을 렌더링할 때 기본적으로 전달하는 context들의 목록이 있다. 그 안에 들어있기 때문에 사용할 수 있다.
 - request는 모든 함수에서 반드시 전달하도록 설정되어 있다. user는 request.user 와 같다.
+
+
+
