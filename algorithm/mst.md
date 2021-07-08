@@ -34,8 +34,6 @@ costs = [11]*(V+1)
 mst = [0]*(V+1)
 # 추가한 노드의 수 기록할 cnt
 cnt = 0
-# weight의 합
-sum_weight = 0
 
 # 0번 노드 추가
 costs[0] = 0
@@ -82,7 +80,7 @@ print(sum_costs)
 ```python
 # 그래프에 연결되었다면 대표노드를, 아니라면 자기 자신을 리턴하는 함수: 즉, 어떤 경우에나 대표노드를 리턴
 def find_set(x):
-    if x != p[x]:
+    while x != p[x]:
         x = p[x]
     return x
 
